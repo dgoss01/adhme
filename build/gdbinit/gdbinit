@@ -1,0 +1,2 @@
+source /home/david/dev/adhme/build/gdbinit/symbols
+source /home/david/dev/adhme/build/gdbinit/connect

@@ -1,0 +1,173 @@
+[0;32mI (101) esp_image: segment 0: paddr=00010020 vaddr=3c0200MSPI TiESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0x2b (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40048839
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x19b4
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xe8c
+load:0x403cb700,len:0x3144
+entry 0x403c8940
+[0;32mI (26) boot: ESP-IDF v5.3.5 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time Apr 24 2026 13:21:49[0m
+[0;32mI (27) boot: Multicore bootloader[0m
+[0;32mI (30) boot: chip revision: v0.2[0m
+[0;32mI (34) boot: efuse block revision: v1.3[0m
+[0;32mI (38) qio_mode: Enabling QIO for flash chip WinBond[0m
+[0;32mI (44) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (49) boot.esp32s3: SPI Mode       : QIO[0m
+[0;32mI (53) boot.esp32s3: SPI Flash Size : 4MB[0m
+[0;32mI (58) boot: Enabling RNG early entropy source...[0m
+[0;32mI (63) boot: Partition Table:[0m
+[0;32mI (67) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (74) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (82) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (89) boot:  2 factory          factory app      00 00 00010000 00300000[0m
+[0;32mI (97) boot: End of partition table[0m
+[0;32mI (101) esp_image: segment 0: paddr=00010020 vaddr=3c020020 size=09e7ch ( 40572) map[0m
+[0;32mI (116) esp_image: segment 1: paddr=00019ea4 vaddr=3fc92b00 size=03410h ( 13328) load[0m
+[0;32mI (120) esp_image: segment 2: paddr=0001d2bc vaddr=40374000 size=02d5ch ( 11612) load[0m
+[0;32mI (129) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=124a8h ( 74920) map[0m
+[0;32mI (146) esp_image: segment 4: paddr=000324d0 vaddr=40376d5c size=0bc98h ( 48280) load[0m
+[0;32mI (162) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (162) boot: Disabling RNG early entropy source...[0m
+[0;32mI (174) octal_psram: vendor id    : 0x0d (AP)[0m
+[0;32mI (174) octal_psram: dev id       : 0x02 (generation 3)[0m
+[0;32mI (175) octal_psram: density      : 0x03 (64 Mbit)[0m
+[0;32mI (179) octal_psram: good-die     : 0x01 (Pass)[0m
+[0;32mI (185) octal_psram: Latency      : 0x01 (Fixed)[0m
+[0;32mI (190) octal_psram: VCC          : 0x01 (3V)[0m
+[0;32mI (195) octal_psram: SRF          : 0x01 (Fast Refresh)[0m
+[0;32mI (201) octal_psram: BurstType    : 0x01 (Hybrid Wrap)[0m
+[0;32mI (207) octal_psram: BurstLen     : 0x01 (32 Byte)[0m
+[0;32mI (212) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)[0m
+[0;32mI (218) octal_psram: DriveStrength: 0x00 (1/1)[0m
+[0;32mI (224) MSPI Timing: PSRAM timing tuning index: 5[0m
+[0;32mI (229) esp_psram: Found 8MB PSRAM device[0m
+[0;32mI (233) esp_psram: Speed: 80MHz[0m
+[0;32mI (241) mmu_psram: Read only data copied and mapped to SPIRAM[0m
+[0;32mI (252) mmu_psram: Instructions copied and mapped to SPIRAM[0m
+[0;32mI (252) cpu_start: Multicore app[0m
+[0;32mI (532) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (541) cpu_start: Pro cpu start user code[0m
+[0;32mI (541) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (541) app_init: Application information:[0m
+[0;32mI (544) app_init: Project name:     adhme[0m
+[0;32mI (549) app_init: App version:      1[0m
+[0;32mI (553) app_init: Compile time:     Apr 24 2026 13:26:47[0m
+[0;32mI (559) app_init: ELF file SHA256:  2cf786bdb...[0m
+[0;32mI (564) app_init: ESP-IDF:          v5.3.5[0m
+[0;32mI (569) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (574) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (579) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (584) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (591) heap_init: At 3FC96870 len 00052EA0 (331 KiB): RAM[0m
+[0;32mI (597) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (603) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (609) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (615) esp_psram: Adding pool of 8000K of PSRAM memory to heap allocator[0m
+[0;32mI (623) esp_psram: Adding pool of 24K of PSRAM memory gap generated due to end address alignment of drom to the heap allocator[0m
+[0;32mI (635) spi_flash: detected chip: winbond[0m
+[0;32mI (640) spi_flash: flash io: qio[0m
+[0;33mW (643) spi_flash: Detected size(16384k) larger than the size in the binary image header(4096k). Using the size in the binary image header.[0m
+[0;32mI (657) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (664) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (671) main_task: Started on CPU0[0m
+[0;32mI (675) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (684) main_task: Calling app_main()[0m
+[0;32mI (688) ADHMe: ADHMe starting...[0m
+[0;32mI (692) ADHMe: alive[0m
+[0;32mI (1695) ADHMe: alive[0m
+[0;32mI (2695) ADHMe: alive[0m
+[0;32mI (3695) ADHMe: alive[0m
+[0;32mI (4695) ADHMe: alive[0m
+[0;32mI (5695) ADHMe: alive[0m
+[0;32mI (6695) ADHMe: alive[0m
+[0;32mI (7695) ADHMe: alive[0m
+[0;32mI (8695) ADHMe: alive[0m
+[0;32mI (9695) ADHMe: alive[0m
+[0;32mI (10695) ADHMe: alive[0m
+[0;32mI (11695) ADHMe: alive[0m
+[0;32mI (12695) ADHMe: alive[0m
+[0;32mI (13695) ADHMe: alive[0m
+[0;32mI (14695) ADHMe: alive[0m
+[0;32mI (15695) ADHMe: alive[0m
+[0;32mI (16695) ADHMe: alive[0m
+[0;32mI (17695) ADHMe: alive[0m
+[0;32mI (18695) ADHMe: alive[0m
+[0;32mI (19695) ADHMe: alive[0m
+[0;32mI (20695) ADHMe: alive[0m
+[0;32mI (21695) ADHMe: alive[0m
+[0;32mI (22695) ADHMe: alive[0m
+[0;32mI (23695) ADHMe: alive[0m
+[0;32mI (24695) ADHMe: alive[0m
+[0;32mI (25695) ADHMe: alive[0m
+[0;32mI (26695) ADHMe: alive[0m
+[0;32mI (27695) ADHMe: alive[0m
+[0;32mI (28695) ADHMe: alive[0m
+[0;32mI (29695) ADHMe: alive[0m
+[0;32mI (30695) ADHMe: alive[0m
+[0;32mI (31695) ADHMe: alive[0m
+[0;32mI (32695) ADHMe: alive[0m
+[0;32mI (33695) ADHMe: alive[0m
+[0;32mI (34695) ADHMe: alive[0m
+[0;32mI (35695) ADHMe: alive[0m
+[0;32mI (36695) ADHMe: alive[0m
+[0;32mI (37695) ADHMe: alive[0m
+[0;32mI (38695) ADHMe: alive[0m
+[0;32mI (39695) ADHMe: alive[0m
+[0;32mI (40695) ADHMe: alive[0m
+[0;32mI (41695) ADHMe: alive[0m
+[0;32mI (42695) ADHMe: alive[0m
+[0;32mI (43695) ADHMe: alive[0m
+[0;32mI (44695) ADHMe: alive[0m
+[0;32mI (45695) ADHMe: alive[0m
+[0;32mI (46695) ADHMe: alive[0m
+[0;32mI (47695) ADHMe: alive[0m
+[0;32mI (48695) ADHMe: alive[0m
+[0;32mI (49695) ADHMe: alive[0m
+[0;32mI (50695) ADHMe: alive[0m
+[0;32mI (51695) ADHMe: alive[0m
+[0;32mI (52695) ADHMe: alive[0m
+[0;32mI (53695) ADHMe: alive[0m
+[0;32mI (54695) ADHMe: alive[0m
+[0;32mI (55695) ADHMe: alive[0m
+[0;32mI (56695) ADHMe: alive[0m
+[0;32mI (57695) ADHMe: alive[0m
+[0;32mI (58695) ADHMe: alive[0m
+[0;32mI (59695) ADHMe: alive[0m
+[0;32mI (60695) ADHMe: alive[0m
+[0;32mI (61695) ADHMe: alive[0m
+[0;32mI (62695) ADHMe: alive[0m
+[0;32mI (63695) ADHMe: alive[0m
+[0;32mI (64695) ADHMe: alive[0m
+[0;32mI (65695) ADHMe: alive[0m
+[0;32mI (66695) ADHMe: alive[0m
+[0;32mI (67695) ADHMe: alive[0m
+[0;32mI (68695) ADHMe: alive[0m
+[0;32mI (69695) ADHMe: alive[0m
+[0;32mI (70695) ADHMe: alive[0m
+[0;32mI (71695) ADHMe: alive[0m
+[0;32mI (72695) ADHMe: alive[0m
+[0;32mI (73695) ADHMe: alive[0m
+[0;32mI (74695) ADHMe: alive[0m
+[0;32mI (75695) ADHMe: alive[0m
+[0;32mI (76695) ADHMe: alive[0m
+[0;32mI (77695) ADHMe: alive[0m
+[0;32mI (78695) ADHMe: alive[0m
+[0;32mI (79695) ADHMe: alive[0m
+[0;32mI (80695) ADHMe: alive[0m
+[0;32mI (81695) ADHMe: alive[0m
+[0;32mI (82695) ADHMe: alive[0m
+[0;32mI (83695) ADHMe: alive[0m
+[0;32mI (84695) ADHMe: alive[0m
+[0;32mI (85695) ADHMe: alive[0m
+[0;32mI (86695) ADHMe: alive[0m
+[0;32mI (87695) ADHMe: alive[0m
+[0;32mI (88695) ADHMe: alive[0m
+[0;32mI (89695) ADHMe: alive[0m
+[0;32mI (90695) ADHMe: alive[0m
+[0;32mI (91695) ADHMe: alive[0m
+[0;32mI (92695) ADHMe: alive[0m
+[0;32mI (9

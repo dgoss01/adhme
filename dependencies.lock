@@ -1,0 +1,24 @@
+dependencies:
+  espressif/cmake_utilities:
+    dependencies: []
+    source:
+      path: /home/david/dev/adhme/components/espressif__cmake_utilities
+      type: local
+    version: 0.5.3
+  espressif/esp_lcd_touch:
+    dependencies: []
+    source:
+      path: /home/david/dev/adhme/components/espressif__esp_lcd_touch
+      type: local
+    version: 1.1.1
+  idf:
+    source:
+      type: idf
+    version: 5.3.5
+direct_dependencies:
+- espressif/cmake_utilities
+- espressif/esp_lcd_touch
+- idf
+manifest_hash: abdeac9aff30d9620b220e5ecf563e7616f05118abbbe71fa9066bb4e739e49f
+target: esp32s3
+version: 2.0.0

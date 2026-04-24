@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/home/david/dev/adhme/build/CMakeFiles/bootloader
+/home/david/dev/adhme/build/CMakeFiles/bootloader.rule
+/home/david/dev/adhme/build/CMakeFiles/bootloader-complete.rule
+/home/david/dev/adhme/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/home/david/dev/adhme/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/david/dev/adhme/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/david/dev/adhme/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/david/dev/adhme/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/david/dev/adhme/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/david/dev/adhme/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
