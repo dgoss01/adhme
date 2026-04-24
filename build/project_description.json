@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "adhme",
-    "project_version":    "1",
+    "project_version":    "9bfd9fc-dirty",
     "project_path":       "/home/david/dev/adhme",
     "idf_path":           "/home/david/.espressif/v5.3.5/esp-idf",
     "build_dir":          "/home/david/dev/adhme/build",
