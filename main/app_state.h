@@ -17,6 +17,7 @@ typedef enum {
     STATE_SPARK,
     STATE_WIND_DOWN,
     STATE_QUICK_CAPTURE,
+    STATE_TIMESET,
     STATE_COUNT  // always last — lets us bounds-check
 } adhme_state_t;
 
