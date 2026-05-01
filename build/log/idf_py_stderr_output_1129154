@@ -1,0 +1,7 @@
+[0;33m--- esp-idf-monitor 1.9.0 on /dev/ttyACM0 460800[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+[0m--- 0x40056f59: [0;33mmemcpy[0m[0m in [0;32mROM[0m
+[0m--- 0x40390143: [0;33m_xt_handle_exc[0m[0m at [0;32m/home/david/.espressif/v5.3.5/esp-idf/components/xtensa/xtensa_vectors.S[0m[0m:[1;31m760[0m
+[0m--- 0x40390135: [0;33m_xt_handle_exc[0m[0m at [0;32m/home/david/.espressif/v5.3.5/esp-idf/components/xtensa/xtensa_vectors.S[0m[0m:[1;31m742[0m
+[0m--- 0x4039015a: [0;33m_xt_handle_exc[0m[0m at [0;32m/home/david/.espressif/v5.3.5/esp-idf/components/xtensa/xtensa_vectors.S[0m[0m:[1;31m795[0m
+[0m

@@ -1,0 +1,6 @@
+[0;33m--- esp-idf-monitor 1.9.0 on /dev/ttyACM0 460800[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+[0m--- 0x4200946f: [0;33ms_test_psram[0m[0m at [0;32m/home/david/.espressif/v5.3.5/esp-idf/components/esp_psram/esp_psram.c[0m[0m:[1;31m538[0m
+[0m--- 0x4039fc67: [0;33mxthal_save_extra_nw[0m[0m at [0;32m??[0m[0m:[1;31m?[0m
+[0m--- 0x4039fd22: [0;33m_xt_context_save[0m[0m at [0;32m/home/david/.espressif/v5.3.5/esp-idf/components/xtensa/xtensa_context.S[0m[0m:[1;31m206[0m
+[0m

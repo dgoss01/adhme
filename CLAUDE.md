@@ -36,3 +36,18 @@
 - Core 0: LVGL rendering + UI state machine
 - Core 1: Audio capture, WiFi sync, sensor reads
 - Global double-press handler sits above app layer
+
+## Current Status (Apr 24 2026)
+- LVGL 9 running on hardware ✓
+- Color format: LV_COLOR_FORMAT_RGB565_SWAPPED + LCD_RGB_ELEMENT_ORDER_RGB ✓
+- Draw buffers: 20-line internal DMA (MALLOC_CAP_DMA | MALLOC_CAP_INTERNAL) ✓
+- Home screen rendering correctly ✓
+- RTC reading (time wrong, ui_timeset.c built but not wired to long-press yet)
+- ui_timeset.c has unused step_labels warning to clean up
+
+## Next Steps
+1. Wire long-press on clock → STATE_TIMESET
+2. Test time setter on hardware
+3. Build Check In screen (sliders → LVGL)
+4. Build Drift screen (card deck)
+5. Wire button handler to physical PWR/BOOT buttons

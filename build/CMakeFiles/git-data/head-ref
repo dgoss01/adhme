@@ -1,1 +1,8 @@
-dc0e63399e7e971177d5b3102553e8d6217c0fa2
+0000000000000000000000000000000000000000 9bfd9fc3d3d682b8b2222d082ddfb51a4459fc80 David <david@binar> 1777062558 -0700	commit (initial): feat: initial project skeleton - builds and flashes clean
+9bfd9fc3d3d682b8b2222d082ddfb51a4459fc80 9bfd9fc3d3d682b8b2222d082ddfb51a4459fc80 David <david@binar> 1777062598 -0700	Branch: renamed refs/heads/master to refs/heads/main
+9bfd9fc3d3d682b8b2222d082ddfb51a4459fc80 9bfd9fc3d3d682b8b2222d082ddfb51a4459fc80 David <david@binar> 1777062617 -0700	Branch: renamed refs/heads/main to refs/heads/main
+9bfd9fc3d3d682b8b2222d082ddfb51a4459fc80 9bfd9fc3d3d682b8b2222d082ddfb51a4459fc80 David <david@binar> 1777062800 -0700	Branch: renamed refs/heads/main to refs/heads/main
+9bfd9fc3d3d682b8b2222d082ddfb51a4459fc80 9bfd9fc3d3d682b8b2222d082ddfb51a4459fc80 David <david@binar> 1777063147 -0700	Branch: renamed refs/heads/main to refs/heads/main
+9bfd9fc3d3d682b8b2222d082ddfb51a4459fc80 3c8272b474a8b36a3182be314089d438dc1cd812 David <david@binar> 1777063865 -0700	commit: feat: state machine + task architecture - boots clean on hardware
+3c8272b474a8b36a3182be314089d438dc1cd812 dc0e63399e7e971177d5b3102553e8d6217c0fa2 David <david@binar> 1777064898 -0700	commit: feat: display init + first LVGL render - ADHMe text on glass
+dc0e63399e7e971177d5b3102553e8d6217c0fa2 6a377672c5da0d8c3539a60a7a810b64c88fc7e3 David <david@binar> 1777071751 -0700	commit: feat: upgrade to LVGL 9, fix color format, PSRAM buffers working

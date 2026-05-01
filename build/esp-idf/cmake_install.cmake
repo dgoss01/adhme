@@ -569,6 +569,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("/home/david/dev/adhme/build/esp-idf/espressif__es8311/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("/home/david/dev/adhme/build/esp-idf/espressif__esp_io_expander/cmake_install.cmake")
 endif()
 

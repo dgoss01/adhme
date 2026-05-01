@@ -11,6 +11,12 @@ dependencies:
       path: /home/david/dev/adhme/components/espressif__cmake_utilities
       type: local
     version: 0.5.3
+  espressif/es8311:
+    dependencies: []
+    source:
+      path: /home/david/dev/adhme/components/espressif__es8311
+      type: local
+    version: 1.0.0~1
   espressif/esp_io_expander:
     component_hash: 7b7f91270172e46ca4597e3874f48d8412e280e8c295559f5922ec38656e3e5f
     dependencies:
@@ -61,11 +67,12 @@ dependencies:
 direct_dependencies:
 - esp_lcd_sh8601
 - espressif/cmake_utilities
+- espressif/es8311
 - espressif/esp_io_expander_tca9554
 - espressif/esp_lcd_touch
 - espressif/esp_lcd_touch_ft5x06
 - idf
 - lvgl/lvgl
-manifest_hash: fe85fcf25aa54539fdf92cc1223a03169837aa930f6f331316b2983fab259ad7
+manifest_hash: 445ac98884397065fd3f46f76215973b7a0bdd273f88a0963adebf951e5acf2a
 target: esp32s3
 version: 2.0.0

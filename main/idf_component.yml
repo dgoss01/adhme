@@ -1,16 +1,17 @@
-version: "1.0.0"
+version: 1.0.0
 dependencies:
   idf:
-    version: ">=5.3.0"
+    version: '>=5.3.0'
   espressif/esp_io_expander_tca9554:
-    version: "^1.0.1"
+    version: ^1.0.1
   esp_lcd_touch_ft5x06:
-    version: "*"
+    version: '*'
     public: true
   esp_lcd_sh8601:
-    path: "../components/esp_lcd_sh8601"
-    version: "*"
+    path: ../components/esp_lcd_sh8601
+    version: '*'
     public: true
   lvgl/lvgl:
-    version: "^9.0.0"
+    version: ^9.0.0
     public: true
+  espressif/es8311: ^1.0.0

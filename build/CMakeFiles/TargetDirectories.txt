@@ -856,6 +856,13 @@
 /home/david/dev/adhme/build/esp-idf/lvgl__lvgl/CMakeFiles/install.dir
 /home/david/dev/adhme/build/esp-idf/lvgl__lvgl/CMakeFiles/install/local.dir
 /home/david/dev/adhme/build/esp-idf/lvgl__lvgl/CMakeFiles/install/strip.dir
+/home/david/dev/adhme/build/esp-idf/espressif__es8311/CMakeFiles/__idf_espressif__es8311.dir
+/home/david/dev/adhme/build/esp-idf/espressif__es8311/CMakeFiles/edit_cache.dir
+/home/david/dev/adhme/build/esp-idf/espressif__es8311/CMakeFiles/rebuild_cache.dir
+/home/david/dev/adhme/build/esp-idf/espressif__es8311/CMakeFiles/list_install_components.dir
+/home/david/dev/adhme/build/esp-idf/espressif__es8311/CMakeFiles/install.dir
+/home/david/dev/adhme/build/esp-idf/espressif__es8311/CMakeFiles/install/local.dir
+/home/david/dev/adhme/build/esp-idf/espressif__es8311/CMakeFiles/install/strip.dir
 /home/david/dev/adhme/build/esp-idf/espressif__esp_io_expander/CMakeFiles/__idf_espressif__esp_io_expander.dir
 /home/david/dev/adhme/build/esp-idf/espressif__esp_io_expander/CMakeFiles/edit_cache.dir
 /home/david/dev/adhme/build/esp-idf/espressif__esp_io_expander/CMakeFiles/rebuild_cache.dir

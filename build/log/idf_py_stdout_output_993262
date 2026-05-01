@@ -1,0 +1,95 @@
+timeESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0x2b (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4004883e
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2810,len:0x1828
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xce8
+load:0x403cb700,len:0x2eb8
+entry 0x403c8918
+[0;32mI (26) boot: ESP-IDF v5.3.5 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time Apr 27 2026 15:09:28[0m
+[0;32mI (27) boot: Multicore bootloader[0m
+[0;32mI (30) boot: chip revision: v0.2[0m
+[0;32mI (34) boot: efuse block revision: v1.3[0m
+[0;32mI (38) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (43) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (48) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (52) boot: Enabling RNG early entropy source...[0m
+[0;32mI (58) boot: Partition Table:[0m
+[0;32mI (61) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (69) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (76) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (84) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (91) boot: End of partition table[0m
+[0;32mI (95) esp_image: segment 0: paddr=00010020 vaddr=3c080020 size=45190h (283024) map[0m
+[0;32mI (155) esp_image: segment 1: paddr=000551b8 vaddr=3fc97100 size=032f4h ( 13044) load[0m
+[0;32mI (159) esp_image: segment 2: paddr=000584b4 vaddr=40374000 size=07b64h ( 31588) load[0m
+[0;32mI (168) esp_image: segment 3: paddr=00060020 vaddr=42000020 size=77d5ch (490844) map[0m
+[0;32mI (259) esp_image: segment 4: paddr=000d7d84 vaddr=4037bb64 size=0b4c4h ( 46276) load[0m
+[0;32mI (277) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (278) boot: Disabling RNG early entropy source...[0m
+[0;32mI (290) cpu_start: Multicore app[0m
+[0;32mI (299) cpu_start: Pro cpu start user code[0m
+[0;32mI (299) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (299) app_init: Application information:[0m
+[0;32mI (302) app_init: Project name:     adhme[0m
+[0;32mI (306) app_init: App version:      6a37767-dirty[0m
+[0;32mI (312) app_init: Compile time:     Apr 27 2026 15:13:09[0m
+[0;32mI (318) app_init: ELF file SHA256:  05b9fbf13...[0m
+[0;32mI (323) app_init: ESP-IDF:          v5.3.5[0m
+[0;32mI (328) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (333) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (338) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (342) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (350) heap_init: At 3FCAB1E8 len 0003E528 (249 KiB): RAM[0m
+[0;32mI (356) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (362) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (368) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (375) spi_flash: detected chip: winbond[0m
+[0;32mI (379) spi_flash: flash io: dio[0m
+[0;33mW (383) spi_flash: Detected size(16384k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (396) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (407) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (414) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (421) main_task: Started on CPU0[0m
+[0;32mI (431) main_task: Calling app_main()[0m
+[0;32mI (431) ADHMe: ADHMe starting...[0m
+[0;32mI (431) display: Init I2C[0m
+[0;32mI (441) display: Init IO expander[0m
+[0;32mI (641) display: Init SPI[0m
+[0;32mI (641) display: Install panel IO[0m
+[0;32mI (641) display: Install SH8601[0m
+[0;32mI (641) sh8601: LCD panel create success, version: 1.0.0[0m
+[0;32mI (871) display: Init touch[0m
+[0;32mI (871) gpio: GPIO[21]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:2 [0m
+[0;32mI (871) display: Init LVGL 9[0m
+[0;32mI (881) display: LVGL task started[0m
+[0;32mI (911) display: Display ready[0m
+[0;32mI (931) ES8311: ES8311 in Slave mode and I2S format[0m
+[0;32mI (931) gpio: GPIO[46]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (941) audio_cap: Audio ready — 16000 Hz mono WAV to SD[0m
+[0;32mI (951) rtc: System time synced from RTC (DST offset: 0s)[0m
+[0;32mI (1181) ui_qc: Quick Capture ready[0m
+[0;32mI (1181) gpio: GPIO[2]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (1181) gpio: GPIO[1]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (1191) gpio: GPIO[3]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (1251) sd_card: Mounted on /sdcard — SD 14910.0 MB[0m
+[0;32mI (1411) ADHMe: ADHMe running[0m
+[0;32mI (1411) main_task: Returned from app_main()[0m
+[0;32mI (8041) ui_home: Quick Capture tapped[0m
+[0;32mI (8041) ADHMe: State: HOME → QUICK_CAPTURE[0m
+[0;32mI (9521) audio_cap: Recording → /sdcard/QC032738.WAV[0m
+[0;32mI (9521) ui_qc: Recording started[0m
+[0;32mI (20041) ui_qc: Recording stopped[0m
+[0;32mI (20091) audio_cap: WAV saved: 339968 bytes, 10 sec[0m
+[0;32mI (22891) ADHMe: State: QUICK_CAPTURE → HOME[0m
+[0;32mI (24641) ui_home: Quick Capture tapped[0m
+[0;32mI (24641) ADHMe: State: HOME → QUICK_CAPTURE[0m
+[0;32mI (25571) audio_cap: Recording → /sdcard/QC032754.WAV[0m
+[0;32mI (25571) ui_qc: Recording started[0m
+[0;32mI (29661) ui_qc: Recording stopped[0m
+[0;32mI (29731) audio_cap: WAV saved: 135168 bytes, 4 sec[0m
+[0;32mI (32431) ADHMe: State: QUICK_CAPTURE → HOME[0m

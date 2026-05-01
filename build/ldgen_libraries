@@ -86,6 +86,7 @@
 /home/david/dev/adhme/build/esp-idf/espressif__esp_lcd_touch/libespressif__esp_lcd_touch.a
 /home/david/dev/adhme/build/esp-idf/espressif__esp_lcd_touch_ft5x06/libespressif__esp_lcd_touch_ft5x06.a
 /home/david/dev/adhme/build/esp-idf/lvgl__lvgl/liblvgl__lvgl.a
+/home/david/dev/adhme/build/esp-idf/espressif__es8311/libespressif__es8311.a
 /home/david/dev/adhme/build/esp-idf/espressif__esp_io_expander/libespressif__esp_io_expander.a
 /home/david/dev/adhme/build/esp-idf/espressif__esp_io_expander_tca9554/libespressif__esp_io_expander_tca9554.a
 /home/david/dev/adhme/build/esp-idf/main/libmain.a

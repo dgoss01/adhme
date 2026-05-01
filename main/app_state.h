@@ -51,5 +51,8 @@ extern volatile adhme_state_t g_current_state;
 // Request a state transition from any task
 void adhme_goto(adhme_state_t next_state);
 
+// Returns the state to restore after Quick Capture exits
+adhme_state_t adhme_get_return_state(void);
+
 // Returns human-readable state name (for logging)
 const char* adhme_state_name(adhme_state_t state);

@@ -86,6 +86,7 @@ $<TARGET_FILE:__idf_esp_lcd_sh8601>
 $<TARGET_FILE:__idf_espressif__esp_lcd_touch>
 $<TARGET_FILE:__idf_espressif__esp_lcd_touch_ft5x06>
 $<TARGET_FILE:__idf_lvgl__lvgl>
+$<TARGET_FILE:__idf_espressif__es8311>
 $<TARGET_FILE:__idf_espressif__esp_io_expander>
 $<TARGET_FILE:__idf_espressif__esp_io_expander_tca9554>
 $<TARGET_FILE:__idf_main>

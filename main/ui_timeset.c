@@ -39,7 +39,8 @@ static set_step_t  s_step = STEP_HOUR;
 static lv_obj_t   *s_rollers[5];   // H M D Mo Y
 static lv_obj_t   *s_dst_btn;
 static lv_obj_t   *s_dst_label;
-static lv_obj_t   *s_step_label;
+static lv_obj_t   *s_next_btn;
+static lv_obj_t   *s_next_label;
 static lv_obj_t   *s_screen;
 static int         s_dst_on = 0;
 
@@ -69,26 +70,6 @@ static const char *MONTHS =
 static const char *YEARS =
     "2024\n2025\n2026\n2027\n2028\n2029\n2030";
 
-// ─────────────────────────────────────────
-// Step labels and hints
-// ─────────────────────────────────────────
-static const char *step_labels[] = {
-    "SET HOUR",
-    "SET MINUTE",
-    "SET DAY",
-    "SET MONTH",
-    "SET YEAR",
-    "DST"
-};
-
-static const char *step_hints[] = {
-    "scroll · double-tap to confirm",
-    "scroll · double-tap to confirm",
-    "scroll · double-tap to confirm",
-    "scroll · double-tap to confirm",
-    "scroll · double-tap to confirm",
-    "tap STD/DST · double-tap to save"
-};
 
 // ─────────────────────────────────────────
 // Highlight active roller
@@ -112,9 +93,9 @@ static void highlight_step(set_step_t step)
         lv_color_hex(dst_active ? COL_ACCENT : COL_BORDER), 0);
     lv_obj_set_style_border_width(s_dst_btn, dst_active ? 2 : 1, 0);
 
-    lv_label_set_text(s_step_label,
-        step < STEP_COUNT ?
-        step_hints[step] : step_hints[STEP_DST]);
+    // NEXT button label
+    lv_label_set_text(s_next_label,
+        (step == STEP_DST) ? "SAVE  \xE2\x9C\x93" : "NEXT  \xE2\x86\x92");
 }
 
 // ─────────────────────────────────────────
@@ -148,9 +129,9 @@ static void advance_step(void)
 }
 
 // ─────────────────────────────────────────
-// Double-tap handler on each roller
+// NEXT button handler
 // ─────────────────────────────────────────
-static void roller_double_tap_cb(lv_event_t *e)
+static void next_btn_cb(lv_event_t *e)
 {
     advance_step();
 }
@@ -197,10 +178,6 @@ static lv_obj_t* make_roller(lv_obj_t *parent,
         lv_color_hex(COL_ACCENT), LV_PART_SELECTED);
     lv_obj_set_style_bg_opa(r,
         LV_OPA_20, LV_PART_SELECTED);
-
-    // Double-tap to advance
-    lv_obj_add_event_cb(r, roller_double_tap_cb,
-        LV_EVENT_DOUBLE_CLICKED, NULL);
 
     return r;
 }
@@ -301,8 +278,6 @@ lv_obj_t* ui_timeset_create(void)
     lv_obj_clear_flag(s_dst_btn, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_add_flag(s_dst_btn, LV_OBJ_FLAG_CLICKABLE);
     lv_obj_add_event_cb(s_dst_btn, dst_tap_cb, LV_EVENT_CLICKED, NULL);
-    lv_obj_add_event_cb(s_dst_btn, roller_double_tap_cb,
-        LV_EVENT_DOUBLE_CLICKED, NULL);
 
     s_dst_label = lv_label_create(s_dst_btn);
     lv_label_set_text(s_dst_label, s_dst_on ? "DST" : "STD");
@@ -312,14 +287,25 @@ lv_obj_t* ui_timeset_create(void)
         &lv_font_montserrat_20, 0);
     lv_obj_center(s_dst_label);
 
-    // ── Step hint label ──
-    s_step_label = lv_label_create(s_screen);
-    lv_label_set_text(s_step_label, step_hints[STEP_HOUR]);
-    lv_obj_set_style_text_color(s_step_label,
-        lv_color_hex(COL_TEXT_DIM), 0);
-    lv_obj_set_style_text_font(s_step_label,
-        &lv_font_montserrat_12, 0);
-    lv_obj_align(s_step_label, LV_ALIGN_BOTTOM_MID, 0, -12);
+    // ── NEXT / SAVE button ──
+    s_next_btn = lv_obj_create(s_screen);
+    lv_obj_set_size(s_next_btn, 320, 52);
+    lv_obj_align(s_next_btn, LV_ALIGN_BOTTOM_MID, 0, -8);
+    lv_obj_set_style_bg_color(s_next_btn, lv_color_hex(0x0f2a10), 0);
+    lv_obj_set_style_bg_opa(s_next_btn, LV_OPA_COVER, 0);
+    lv_obj_set_style_border_color(s_next_btn, lv_color_hex(COL_ACCENT), 0);
+    lv_obj_set_style_border_width(s_next_btn, 1, 0);
+    lv_obj_set_style_radius(s_next_btn, 14, 0);
+    lv_obj_set_style_pad_all(s_next_btn, 0, 0);
+    lv_obj_clear_flag(s_next_btn, LV_OBJ_FLAG_SCROLLABLE);
+    lv_obj_add_flag(s_next_btn, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(s_next_btn, next_btn_cb, LV_EVENT_CLICKED, NULL);
+
+    s_next_label = lv_label_create(s_next_btn);
+    lv_label_set_text(s_next_label, "NEXT  \xE2\x86\x92");
+    lv_obj_set_style_text_color(s_next_label, lv_color_hex(COL_TEXT_HI), 0);
+    lv_obj_set_style_text_font(s_next_label, &lv_font_montserrat_20, 0);
+    lv_obj_center(s_next_label);
 
     // Initial highlight
     highlight_step(STEP_HOUR);

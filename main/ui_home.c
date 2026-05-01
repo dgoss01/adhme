@@ -44,12 +44,12 @@ typedef struct {
 } app_tile_t;
 
 static const app_tile_t tiles[] = {
-    { "◎", "LOCK IN",    "focus · pomodoro",     COL_LOCK_IN,   STATE_LOCK_IN   },
-    { "♡", "CHECK IN",   "mood · energy",         COL_CHECK_IN,  STATE_CHECK_IN  },
-    { "∿", "DRIFT",      "grounding resets",      COL_DRIFT,     STATE_DRIFT     },
-    { "⚓", "ANCHOR",    "pre-dive ritual",       COL_ANCHOR,    STATE_ANCHOR    },
-    { "✦", "SPARK",      "brain warm-up",         COL_SPARK,     STATE_SPARK     },
-    { "◗", "WIND DOWN",  "close the day",         COL_WIND_DOWN, STATE_WIND_DOWN },
+    { "[ ]", "LOCK IN",    "focus · pomodoro",     COL_LOCK_IN,   STATE_LOCK_IN   },
+    { "<3",  "CHECK IN",   "mood · energy",         COL_CHECK_IN,  STATE_CHECK_IN  },
+    { "~",   "DRIFT",      "grounding resets",      COL_DRIFT,     STATE_DRIFT     },
+    { "#",   "ANCHOR",     "pre-dive ritual",       COL_ANCHOR,    STATE_ANCHOR    },
+    { "*",   "SPARK",      "brain warm-up",         COL_SPARK,     STATE_SPARK     },
+    { ">",   "WIND DOWN",  "close the day",         COL_WIND_DOWN, STATE_WIND_DOWN },
 };
 
 // ─────────────────────────────────────────
@@ -140,6 +140,15 @@ static lv_obj_t* make_tile(lv_obj_t *parent, const app_tile_t *t)
 }
 
 // ─────────────────────────────────────────
+// Long press clock → time set
+// ─────────────────────────────────────────
+static void clock_long_press_cb(lv_event_t *e)
+{
+    ESP_LOGI(TAG, "Clock long-press → TIME SET");
+    adhme_goto(STATE_TIMESET);
+}
+
+// ─────────────────────────────────────────
 // Build home screen
 // ─────────────────────────────────────────
 lv_obj_t* ui_home_create(void)
@@ -186,7 +195,7 @@ lv_obj_t* ui_home_create(void)
 
     // ── App grid ──
     lv_obj_t *grid = lv_obj_create(scr);
-    lv_obj_set_size(grid, 348, 240);
+    lv_obj_set_size(grid, 348, 260);
     lv_obj_align(grid, LV_ALIGN_TOP_MID, 0, 112);
     lv_obj_set_style_bg_opa(grid, LV_OPA_TRANSP, 0);
     lv_obj_set_style_border_width(grid, 0, 0);
@@ -226,7 +235,7 @@ lv_obj_t* ui_home_create(void)
     lv_obj_clear_flag(cap, LV_OBJ_FLAG_SCROLLABLE);
 
     // Icon
-    lv_obj_t *ci = make_label(cap, "⊙",
+    lv_obj_t *ci = make_label(cap, "(+)",
         COL_CAPTURE, &lv_font_montserrat_20);
     lv_obj_align(ci, LV_ALIGN_LEFT_MID, 4, 0);
 
@@ -244,6 +253,11 @@ lv_obj_t* ui_home_create(void)
 
     // Initial clock update
     ui_home_tick();
+
+    // Long-press clock → timeset
+    lv_obj_add_flag(s_clock_label, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(s_clock_label,
+        clock_long_press_cb, LV_EVENT_LONG_PRESSED, NULL);
 
     return scr;
 }
@@ -276,22 +290,4 @@ void ui_home_tick(void)
 
     lv_label_set_text(s_clock_label, time_buf);
     lv_label_set_text(s_date_label, date_buf);
-}
-
-// ─────────────────────────────────────────
-// Long press clock → time set
-// ─────────────────────────────────────────
-static void clock_long_press_cb(lv_event_t *e)
-{
-    ESP_LOGI("ui_home", "Clock long-press → TIME SET");
-    adhme_goto(STATE_TIMESET);
-}
-
-void ui_home_register_clock_press(lv_obj_t *scr)
-{
-    // Find clock label and add long-press
-    if (!s_clock_label) return;
-    lv_obj_add_flag(s_clock_label, LV_OBJ_FLAG_CLICKABLE);
-    lv_obj_add_event_cb(s_clock_label,
-        clock_long_press_cb, LV_EVENT_LONG_PRESSED, NULL);
 }
