@@ -2,11 +2,13 @@
 #include "app_state.h"
 #include "display.h"
 #include "audio_capture.h"
+#include "sd_card.h"
 #include "esp_log.h"
 #include <time.h>
 #include <sys/time.h>
 #include <string.h>
 #include <stdlib.h>
+#include <dirent.h>
 
 static const char *TAG = "ui_qc";
 
@@ -160,6 +162,107 @@ static void start_recording(void)
     ESP_LOGI(TAG, "Recording started");
 }
 
+// ─────────────────────────────────────────
+// Recent recordings list
+// ─────────────────────────────────────────
+
+// Parse YYDDD_HHmmss.WAV → display string "MMM DD  HH:mm"
+// Returns false if filename doesn't match expected format
+static bool parse_wav_filename(const char *name, char *out, size_t out_len)
+{
+    int yy, ddd, hh, mm, ss;
+    if (sscanf(name, "%02d%03d_%02d%02d%02d.WAV", &yy, &ddd, &hh, &mm, &ss) != 5)
+        return false;
+
+    // Convert year + day-of-year → struct tm so we get month + mday
+    struct tm t = {0};
+    t.tm_year = yy + 100;   // years since 1900 (yy=26 → 2026 → 126)
+    t.tm_yday = ddd - 1;    // 0-based
+    t.tm_mday = 1;          // mktime needs a valid mday to start from
+    t.tm_mon  = 0;
+    // Use timegm-style trick: set Jan 1 of that year, add yday as seconds
+    t.tm_hour = hh;
+    t.tm_min  = mm;
+    t.tm_sec  = ss + (ddd - 1) * 86400;  // roll forward by day-of-year
+    mktime(&t);             // normalizes: fills tm_mon, tm_mday, tm_wday
+
+    static const char *months[] = {
+        "Jan","Feb","Mar","Apr","May","Jun",
+        "Jul","Aug","Sep","Oct","Nov","Dec"
+    };
+    snprintf(out, out_len, "%s %2d  %02d:%02d",
+        months[t.tm_mon], t.tm_mday, hh, mm);
+    return true;
+}
+
+// Scan SD card, collect up to MAX_WAV .WAV filenames, sort descending,
+// display the 3 most recent in s_recent_rows[]
+#define MAX_WAV 32
+static void update_recent_list(void)
+{
+    if (!sd_card_mounted()) {
+        for (int i = 0; i < 3; i++)
+            lv_label_set_text(s_recent_rows[i], "no SD card");
+        return;
+    }
+
+    // Collect WAV filenames
+    static char names[MAX_WAV][20];
+    int count = 0;
+
+    DIR *dir = opendir(SD_MOUNT_POINT);
+    if (!dir) {
+        ESP_LOGW(TAG, "opendir failed");
+        return;
+    }
+
+    struct dirent *ent;
+    while ((ent = readdir(dir)) != NULL && count < MAX_WAV) {
+        const char *n = ent->d_name;
+        size_t l = strlen(n);
+        // Match YYDDD_HHmmss.WAV — 16 chars exactly
+        if (l == 16 && strcmp(n + 12, ".WAV") == 0) {
+            strncpy(names[count], n, sizeof(names[0]) - 1);
+            names[count][sizeof(names[0]) - 1] = '\0';
+            count++;
+        }
+    }
+    closedir(dir);
+
+    if (count == 0) {
+        for (int i = 0; i < 3; i++)
+            lv_label_set_text(s_recent_rows[i], "--");
+        return;
+    }
+
+    // Sort descending — newest filename = largest string = most recent
+    // Simple insertion sort, count is small
+    for (int i = 1; i < count; i++) {
+        char tmp[20];
+        strncpy(tmp, names[i], sizeof(tmp));
+        int j = i - 1;
+        while (j >= 0 && strcmp(names[j], tmp) < 0) {
+            strncpy(names[j + 1], names[j], sizeof(names[0]));
+            j--;
+        }
+        strncpy(names[j + 1], tmp, sizeof(names[0]));
+    }
+
+    // Fill the 3 rows
+    for (int i = 0; i < 3; i++) {
+        if (i < count) {
+            char display[24];
+            if (parse_wav_filename(names[i], display, sizeof(display))) {
+                lv_label_set_text(s_recent_rows[i], display);
+            } else {
+                lv_label_set_text(s_recent_rows[i], names[i]);
+            }
+        } else {
+            lv_label_set_text(s_recent_rows[i], "--");
+        }
+    }
+}
+
 static void stop_recording(void)
 {
     lv_timer_pause(s_dur_timer);
@@ -187,6 +290,7 @@ static void stop_recording(void)
     lv_label_set_text(s_conf_duration, dur);
 
     wave_freeze();
+    update_recent_list();
     show_page(QC_CONFIRM);
 
     ESP_LOGI(TAG, "Recording stopped");

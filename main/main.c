@@ -13,6 +13,7 @@
 #include "ui_quick_capture.h"
 #include "audio_capture.h"
 #include "sd_card.h"
+#include "button.h"
 
 static const char *TAG = "ADHMe";
 
@@ -22,10 +23,48 @@ static const char *TAG = "ADHMe";
 QueueHandle_t g_state_queue;
 QueueHandle_t g_button_queue;
 volatile adhme_state_t g_current_state = STATE_HOME;
+
 static lv_obj_t *s_home_screen          = NULL;
 static lv_obj_t *s_timeset_screen       = NULL;
 static lv_obj_t *s_quick_capture_screen = NULL;
-static adhme_state_t s_return_state     = STATE_HOME;
+
+// Stub screens — replaced when each app is implemented
+static lv_obj_t *s_lock_in_screen      = NULL;
+static lv_obj_t *s_check_in_screen     = NULL;
+static lv_obj_t *s_drift_screen        = NULL;
+static lv_obj_t *s_breathe_screen      = NULL;
+static lv_obj_t *s_sand_screen         = NULL;
+static lv_obj_t *s_spark_screen        = NULL;
+
+static adhme_state_t s_return_state    = STATE_HOME;
+
+// ─────────────────────────────────────────
+// Stub screen builder — dark background + centered label
+// Used as placeholder until each app screen is implemented
+// ─────────────────────────────────────────
+static lv_obj_t* build_stub_screen(const char *name, uint32_t accent)
+{
+    lv_obj_t *scr = lv_obj_create(NULL);
+    lv_obj_set_style_bg_color(scr, lv_color_hex(0x030a03), 0);
+    lv_obj_set_style_bg_opa(scr, LV_OPA_COVER, 0);
+    lv_obj_set_style_border_width(scr, 0, 0);
+    lv_obj_set_style_pad_all(scr, 0, 0);
+    lv_obj_clear_flag(scr, LV_OBJ_FLAG_SCROLLABLE);
+
+    lv_obj_t *lbl = lv_label_create(scr);
+    lv_label_set_text(lbl, name);
+    lv_obj_set_style_text_color(lbl, lv_color_hex(accent), 0);
+    lv_obj_set_style_text_font(lbl, &lv_font_montserrat_20, 0);
+    lv_obj_center(lbl);
+
+    lv_obj_t *hint = lv_label_create(scr);
+    lv_label_set_text(hint, "coming soon");
+    lv_obj_set_style_text_color(hint, lv_color_hex(0x2e4e28), 0);
+    lv_obj_set_style_text_font(hint, &lv_font_montserrat_12, 0);
+    lv_obj_align(hint, LV_ALIGN_CENTER, 0, 28);
+
+    return scr;
+}
 
 // ─────────────────────────────────────────
 // State name lookup
@@ -35,11 +74,10 @@ const char* adhme_state_name(adhme_state_t state) {
         case STATE_HOME:          return "HOME";
         case STATE_LOCK_IN:       return "LOCK_IN";
         case STATE_CHECK_IN:      return "CHECK_IN";
-        case STATE_CHECK_BACK:    return "CHECK_BACK";
         case STATE_DRIFT:         return "DRIFT";
-        case STATE_ANCHOR:        return "ANCHOR";
+        case STATE_BREATHE:       return "BREATHE";
+        case STATE_SAND:          return "SAND";
         case STATE_SPARK:         return "SPARK";
-        case STATE_WIND_DOWN:     return "WIND_DOWN";
         case STATE_QUICK_CAPTURE: return "QUICK_CAPTURE";
         case STATE_TIMESET:       return "TIMESET";
         default:                  return "UNKNOWN";
@@ -67,30 +105,6 @@ static void clock_timer_cb(void *arg)
 }
 
 // ─────────────────────────────────────────
-// Button task (Core 1)
-// ─────────────────────────────────────────
-static void button_task(void *pvParameters) {
-    adhme_button_event_t event;
-    while (1) {
-        if (xQueueReceive(g_button_queue, &event, portMAX_DELAY)) {
-            switch (event) {
-                case BTN_PWR_SHORT:
-                    ESP_LOGI(TAG, "PWR short → HOME");
-                    adhme_goto(STATE_HOME);
-                    break;
-                case BTN_PWR_DOUBLE:
-                    ESP_LOGI(TAG, "PWR double → QUICK_CAPTURE");
-                    adhme_goto(STATE_QUICK_CAPTURE);
-                    break;
-                case BTN_BOOT_SHORT:
-                    ESP_LOGI(TAG, "BOOT → context action");
-                    break;
-            }
-        }
-    }
-}
-
-// ─────────────────────────────────────────
 // State machine task (Core 0)
 // ─────────────────────────────────────────
 static void state_task(void *pvParameters) {
@@ -113,6 +127,24 @@ static void state_task(void *pvParameters) {
                     switch (msg.next_state) {
                         case STATE_HOME:
                             lv_scr_load(s_home_screen);
+                            break;
+                        case STATE_LOCK_IN:
+                            lv_scr_load(s_lock_in_screen);
+                            break;
+                        case STATE_CHECK_IN:
+                            lv_scr_load(s_check_in_screen);
+                            break;
+                        case STATE_DRIFT:
+                            lv_scr_load(s_drift_screen);
+                            break;
+                        case STATE_BREATHE:
+                            lv_scr_load(s_breathe_screen);
+                            break;
+                        case STATE_SAND:
+                            lv_scr_load(s_sand_screen);
+                            break;
+                        case STATE_SPARK:
+                            lv_scr_load(s_spark_screen);
                             break;
                         case STATE_TIMESET:
                             lv_scr_load(s_timeset_screen);
@@ -157,7 +189,7 @@ void app_main(void)
 
     display_init();
 
-    // Audio codec + I2S (I2C must be up first, display_init handles that)
+    // Audio codec + I2S (I2C must be up first — display_init handles that)
     if (audio_capture_init() != ESP_OK) {
         ESP_LOGW(TAG, "Audio init failed — Quick Capture will be silent");
     }
@@ -171,12 +203,20 @@ void app_main(void)
         s_home_screen          = ui_home_create();
         s_timeset_screen       = ui_timeset_create();
         s_quick_capture_screen = ui_quick_capture_create();
+
+        // Stub screens — replaced as each app is implemented
+        s_lock_in_screen  = build_stub_screen("LOCK IN",  0x3d8b46);
+        s_check_in_screen = build_stub_screen("CHECK IN", 0xc4a840);
+        s_drift_screen    = build_stub_screen("DRIFT",    0x6a9ab8);
+        s_breathe_screen  = build_stub_screen("BREATHE",  0x7ab8a0);
+        s_sand_screen     = build_stub_screen("SAND",     0xc4a840);
+        s_spark_screen    = build_stub_screen("SPARK",    0x8b9a3d);
+
         lv_scr_load(s_home_screen);
         display_unlock();
     }
 
-    // Mount SD card in background — pins are now correct so this
-    // completes quickly without blocking LVGL or triggering WDT
+    // Mount SD card in background
     xTaskCreate(sd_mount_task, "sd_init", 8192, NULL, 3, NULL);
 
     // Clock timer — update every 30 seconds
@@ -188,8 +228,7 @@ void app_main(void)
     ESP_ERROR_CHECK(esp_timer_create(&clock_args, &clock_timer));
     ESP_ERROR_CHECK(esp_timer_start_periodic(clock_timer, 30 * 1000 * 1000));
 
-    xTaskCreatePinnedToCore(button_task, "button",
-        4096, NULL, 7, NULL, 1);
+    button_init();
     xTaskCreatePinnedToCore(state_task, "state",
         16384, NULL, 5, NULL, 0);
 

@@ -77,7 +77,15 @@ void sd_card_make_filename(char *buf, size_t len)
     struct timeval tv;
     gettimeofday(&tv, NULL);
     struct tm *t = localtime(&tv.tv_sec);
-    // 8.3 format: QCHHMMSSx.WAV — fits FAT without LFN support
-    snprintf(buf, len, SD_MOUNT_POINT "/QC%02d%02d%02d.WAV",
-        t->tm_hour, t->tm_min, t->tm_sec);
-}
+    // Format: YYDDD_HHmmss.WAV
+    //   YY  = 2-digit year (26 = 2026)
+    //   DDD = day-of-year (001–366)
+    //   HH  = hour, mm = minute, ss = second
+    // Sorts chronologically, collision-proof, LFN-friendly
+    snprintf(buf, len, SD_MOUNT_POINT "/%02d%03d-%02d%02d%02d.WAV",
+        t->tm_year - 100,   // years since 2000
+        t->tm_yday + 1,     // 1-based day of year
+        t->tm_hour,
+        t->tm_min,
+        t->tm_sec);
+    }

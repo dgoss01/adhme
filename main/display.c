@@ -66,10 +66,11 @@ static const sh8601_lcd_init_cmd_t lcd_init_cmds[] = {
 // ─────────────────────────────────────────
 // Statics
 // ─────────────────────────────────────────
-static SemaphoreHandle_t     lvgl_mux  = NULL;
-static esp_lcd_touch_handle_t tp       = NULL;
-static esp_lcd_panel_handle_t s_panel  = NULL;
-static lv_display_t          *s_disp   = NULL;
+static SemaphoreHandle_t        lvgl_mux   = NULL;
+static esp_lcd_touch_handle_t    tp         = NULL;
+static esp_lcd_panel_handle_t    s_panel    = NULL;
+static lv_display_t             *s_disp     = NULL;
+static esp_io_expander_handle_t  s_expander = NULL;
 
 // ─────────────────────────────────────────
 // LVGL 9 flush callback — synchronous mode
@@ -149,6 +150,15 @@ void display_unlock(void)
     xSemaphoreGive(lvgl_mux);
 }
 
+
+// ─────────────────────────────────────────
+// Expander accessor — available after display_init()
+// ─────────────────────────────────────────
+esp_io_expander_handle_t display_get_expander(void)
+{
+    return s_expander;
+}
+
 void display_init(void)
 {
     esp_log_level_set("lcd_panel.io.i2c", ESP_LOG_NONE);
@@ -170,19 +180,18 @@ void display_init(void)
 
     // ── IO expander ──
     ESP_LOGI(TAG, "Init IO expander");
-    esp_io_expander_handle_t expander = NULL;
     ESP_ERROR_CHECK(esp_io_expander_new_i2c_tca9554(TOUCH_HOST,
-        ESP_IO_EXPANDER_I2C_TCA9554_ADDRESS_000, &expander));
-    esp_io_expander_set_dir(expander,
+        ESP_IO_EXPANDER_I2C_TCA9554_ADDRESS_000, &s_expander));
+    esp_io_expander_set_dir(s_expander,
         IO_EXPANDER_PIN_NUM_0 | IO_EXPANDER_PIN_NUM_1 |
         IO_EXPANDER_PIN_NUM_2, IO_EXPANDER_OUTPUT);
-    esp_io_expander_set_level(expander, IO_EXPANDER_PIN_NUM_0, 0);
-    esp_io_expander_set_level(expander, IO_EXPANDER_PIN_NUM_1, 0);
-    esp_io_expander_set_level(expander, IO_EXPANDER_PIN_NUM_2, 0);
+    esp_io_expander_set_level(s_expander, IO_EXPANDER_PIN_NUM_0, 0);
+    esp_io_expander_set_level(s_expander, IO_EXPANDER_PIN_NUM_1, 0);
+    esp_io_expander_set_level(s_expander, IO_EXPANDER_PIN_NUM_2, 0);
     vTaskDelay(pdMS_TO_TICKS(200));
-    esp_io_expander_set_level(expander, IO_EXPANDER_PIN_NUM_0, 1);
-    esp_io_expander_set_level(expander, IO_EXPANDER_PIN_NUM_1, 1);
-    esp_io_expander_set_level(expander, IO_EXPANDER_PIN_NUM_2, 1);
+    esp_io_expander_set_level(s_expander, IO_EXPANDER_PIN_NUM_0, 1);
+    esp_io_expander_set_level(s_expander, IO_EXPANDER_PIN_NUM_1, 1);
+    esp_io_expander_set_level(s_expander, IO_EXPANDER_PIN_NUM_2, 1);
 
     // ── SPI ──
     ESP_LOGI(TAG, "Init SPI");

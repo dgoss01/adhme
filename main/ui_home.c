@@ -18,13 +18,13 @@ static const char *TAG = "ui_home";
 #define COL_DIVIDER     0x1a3d16  // hairline
 
 // App accent colors (left edge bars)
-#define COL_LOCK_IN     0x3d8b46
-#define COL_CHECK_IN    0xc4a840
-#define COL_DRIFT       0x6a9ab8
-#define COL_ANCHOR      0xb8c060
-#define COL_SPARK       0x8b9a3d
-#define COL_WIND_DOWN   0x9a70c0
-#define COL_CAPTURE     0x7ab87a
+#define COL_LOCK_IN     0x3d8b46  // forest green  — focus, growth
+#define COL_CHECK_IN    0xc4a840  // amber         — warmth, energy
+#define COL_DRIFT       0x6a9ab8  // steel blue    — calm, grounding
+#define COL_BREATHE     0x7ab8a0  // seafoam       — breath, body
+#define COL_SAND        0xc4a840  // warm amber    — matches sand particles
+#define COL_SPARK       0x8b9a3d  // olive moss    — alive, reactive
+#define COL_CAPTURE     0x7ab87a  // bright leaf   — always-on action
 
 // ─────────────────────────────────────────
 // Clock label (updated by ui_home_tick)
@@ -44,12 +44,12 @@ typedef struct {
 } app_tile_t;
 
 static const app_tile_t tiles[] = {
-    { "[ ]", "LOCK IN",    "focus · pomodoro",     COL_LOCK_IN,   STATE_LOCK_IN   },
-    { "<3",  "CHECK IN",   "mood · energy",         COL_CHECK_IN,  STATE_CHECK_IN  },
-    { "~",   "DRIFT",      "grounding resets",      COL_DRIFT,     STATE_DRIFT     },
-    { "#",   "ANCHOR",     "pre-dive ritual",       COL_ANCHOR,    STATE_ANCHOR    },
-    { "*",   "SPARK",      "brain warm-up",         COL_SPARK,     STATE_SPARK     },
-    { ">",   "WIND DOWN",  "close the day",         COL_WIND_DOWN, STATE_WIND_DOWN },
+    { "[ ]", "LOCK IN",   "focus · pomodoro",    COL_LOCK_IN,  STATE_LOCK_IN  },
+    { "<3",  "CHECK IN",  "mood · energy",        COL_CHECK_IN, STATE_CHECK_IN },
+    { "~",   "DRIFT",     "grounding resets",     COL_DRIFT,    STATE_DRIFT    },
+    { "o-o", "BREATHE",   "breathing patterns",   COL_BREATHE,  STATE_BREATHE  },
+    { ":::","SAND",       "gravity toy",          COL_SAND,     STATE_SAND     },
+    { "*~*", "SPARK",     "touch · flow",         COL_SPARK,    STATE_SPARK    },
 };
 
 // ─────────────────────────────────────────
@@ -106,6 +106,7 @@ static lv_obj_t* make_tile(lv_obj_t *parent, const app_tile_t *t)
     lv_obj_set_style_bg_opa(bar, LV_OPA_COVER, 0);
     lv_obj_set_style_border_width(bar, 0, 0);
     lv_obj_set_style_radius(bar, 1, 0);
+    lv_obj_clear_flag(bar, LV_OBJ_FLAG_CLICKABLE);  // pass touches to tile
 
     // Content column
     lv_obj_t *col = lv_obj_create(tile);
@@ -115,15 +116,17 @@ static lv_obj_t* make_tile(lv_obj_t *parent, const app_tile_t *t)
     lv_obj_set_style_border_width(col, 0, 0);
     lv_obj_set_style_pad_all(col, 0, 0);
     lv_obj_clear_flag(col, LV_OBJ_FLAG_SCROLLABLE);
+    lv_obj_clear_flag(col, LV_OBJ_FLAG_CLICKABLE);  // pass touches to tile
     lv_obj_set_flex_flow(col, LV_FLEX_FLOW_COLUMN);
     lv_obj_set_flex_align(col, LV_FLEX_ALIGN_CENTER,
         LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START);
     lv_obj_set_style_pad_row(col, 3, 0);
 
-    // Icon
-    lv_obj_t *icon = make_label(col, t->icon,
-        t->accent, &lv_font_montserrat_16);
-    lv_obj_set_style_text_color(icon, lv_color_hex(COL_TEXT_HI), 0);
+    // Icon — accent colored
+    lv_obj_t *icon = lv_label_create(col);
+    lv_label_set_text(icon, t->icon);
+    lv_obj_set_style_text_color(icon, lv_color_hex(t->accent), 0);
+    lv_obj_set_style_text_font(icon, &lv_font_montserrat_16, 0);
 
     // Name
     make_label(col, t->name, COL_TEXT_HI, &lv_font_montserrat_12);
@@ -222,7 +225,7 @@ lv_obj_t* ui_home_create(void)
     lv_obj_set_style_border_color(cap,
         lv_color_hex(COL_CAPTURE), LV_PART_MAIN);
 
-    // top accent
+    // top accent line
     lv_obj_t *top = lv_obj_create(cap);
     lv_obj_set_size(top, 320, 2);
     lv_obj_align(top, LV_ALIGN_TOP_MID, 0, -1);

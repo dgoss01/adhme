@@ -1,0 +1,20 @@
+[1/12] Performing build step for 'bootloader'
+[1/1] cd /home/david/dev/adhme/build/bootloader/esp-idf/esptool_py && /home/david/.espressif/python_env/idf5.3_py3.12_env/bin/python /home/david/.espressif/v5.3.5/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 /home/david/dev/adhme/build/bootloader/bootloader.bin
+Bootloader binary size 0x59f0 bytes. 0x2610 bytes (30%) free.
+[2/12] No install step for 'bootloader'
+[3/12] Completed 'bootloader'
+[4/12] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+[5/12] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/ui_timeset.c.obj
+[6/12] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/ui_home.c.obj
+[7/12] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/ui_quick_capture.c.obj
+[8/12] Linking C static library esp-idf/main/libmain.a
+[9/12] Generating ld/sections.ld
+[10/12] Linking CXX executable adhme.elf
+[11/12] Generating binary image from built executable
+esptool.py v4.11.0
+Creating esp32s3 image...
+Merged 2 ELF sections
+Successfully created esp32s3 image.
+Generated /home/david/dev/adhme/build/adhme.bin
+[12/12] cd /home/david/dev/adhme/build/esp-idf/esptool_py && /home/david/.espressif/python_env/idf5.3_py3.12_env/bin/python /home/david/.espressif/v5.3.5/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/david/dev/adhme/build/partition_table/partition-table.bin /home/david/dev/adhme/build/adhme.bin
+adhme.bin binary size 0xe1200 bytes. Smallest app partition is 0x300000 bytes. 0x21ee00 bytes (71%) free.

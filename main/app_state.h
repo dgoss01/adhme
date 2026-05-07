@@ -9,25 +9,24 @@
 // ─────────────────────────────────────────
 typedef enum {
     STATE_HOME = 0,
-    STATE_LOCK_IN,
-    STATE_CHECK_IN,
-    STATE_CHECK_BACK,
-    STATE_DRIFT,
-    STATE_ANCHOR,
-    STATE_SPARK,
-    STATE_WIND_DOWN,
-    STATE_QUICK_CAPTURE,
-    STATE_TIMESET,
-    STATE_COUNT  // always last — lets us bounds-check
+    STATE_LOCK_IN,       // Focus timer with pomodoro rhythm
+    STATE_CHECK_IN,      // Mood · energy · focus · body sliders
+    STATE_DRIFT,         // Grounding micro-task card deck
+    STATE_BREATHE,       // Breathing pacer with pattern selection
+    STATE_SAND,          // IMU-driven gravity sandbox
+    STATE_SPARK,         // Touch-reactive flow field visual
+    STATE_QUICK_CAPTURE, // Voice note recorder (PWR double from anywhere)
+    STATE_TIMESET,       // RTC time/date setter
+    STATE_COUNT          // Always last — lets us bounds-check
 } adhme_state_t;
 
 // ─────────────────────────────────────────
 // Button Events
 // ─────────────────────────────────────────
 typedef enum {
-    BTN_PWR_SHORT = 0,
-    BTN_PWR_DOUBLE,
-    BTN_BOOT_SHORT,
+    BTN_PWR_SHORT = 0,   // → HOME from anywhere
+    BTN_PWR_DOUBLE,      // → QUICK_CAPTURE from anywhere
+    BTN_BOOT_SHORT,      // → Back / exit current app
 } adhme_button_event_t;
 
 // ─────────────────────────────────────────
