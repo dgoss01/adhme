@@ -1,0 +1,75 @@
+[1/5] cd /home/david/dev/adhme/build/esp-idf/esptool_py && /home/david/.espressif/python_env/idf5.3_py3.12_env/bin/python /home/david/.espressif/v5.3.5/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/david/dev/adhme/build/partition_table/partition-table.bin /home/david/dev/adhme/build/adhme.bin
+adhme.bin binary size 0xe8c90 bytes. Smallest app partition is 0x300000 bytes. 0x217370 bytes (70%) free.
+[2/5] Performing build step for 'bootloader'
+[1/1] cd /home/david/dev/adhme/build/bootloader/esp-idf/esptool_py && /home/david/.espressif/python_env/idf5.3_py3.12_env/bin/python /home/david/.espressif/v5.3.5/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 /home/david/dev/adhme/build/bootloader/bootloader.bin
+Bootloader binary size 0x59f0 bytes. 0x2610 bytes (30%) free.
+[3/5] No install step for 'bootloader'
+[4/5] Completed 'bootloader'
+[4/5] cd /home/david/.espressif/v5.3.5/esp-idf/components/esptool_py && /home/david/.espressif/tools/cmake/3.30.2/bin/cmake -D IDF_PATH=/home/david/.espressif/v5.3.5/esp-idf -D "SERIAL_TOOL=/home/david/.espressif/python_env/idf5.3_py3.12_env/bin/python;;/home/david/.espressif/v5.3.5/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32s3" -D "SERIAL_TOOL_ARGS=--before=default_reset;--after=hard_reset;write_flash;@flash_args" -D WORKING_DIRECTORY=/home/david/dev/adhme/build -P /home/david/.espressif/v5.3.5/esp-idf/components/esptool_py/run_serial_tool.cmake
+esptool.py --chip esp32s3 -p /dev/ttyACM0 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 80m --flash_size 16MB 0x0 bootloader/bootloader.bin 0x10000 adhme.bin 0x8000 partition_table/partition-table.bin
+esptool.py v4.11.0
+Serial port /dev/ttyACM0
+Connecting...
+Chip is ESP32-S3 (QFN56) (revision v0.2)
+Features: WiFi, BLE, Embedded PSRAM 8MB (AP_3v3)
+Crystal is 40MHz
+USB mode: USB-Serial/JTAG
+MAC: a0:85:e3:fb:4a:30
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 460800
+Changed.
+Configuring flash size...
+Flash will be erased from 0x00000000 to 0x00005fff...
+Flash will be erased from 0x00010000 to 0x000f8fff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+SHA digest in image updated
+Compressed 23024 bytes to 14139...
+Writing at 0x00000000... (100 %)
+Wrote 23024 bytes (14139 compressed) at 0x00000000 in 0.4 seconds (effective 442.2 kbit/s)...
+Hash of data verified.
+Compressed 953488 bytes to 552254...
+Writing at 0x00010000... (2 %)
+Writing at 0x0001d67d... (5 %)
+Writing at 0x00026ad9... (8 %)
+Writing at 0x0002e694... (11 %)
+Writing at 0x00037f1b... (14 %)
+Writing at 0x00045942... (17 %)
+Writing at 0x00056329... (20 %)
+Writing at 0x0005e562... (23 %)
+Writing at 0x00063d78... (26 %)
+Writing at 0x00069adf... (29 %)
+Writing at 0x0006f7d8... (32 %)
+Writing at 0x00074741... (35 %)
+Writing at 0x0007a0fc... (38 %)
+Writing at 0x0007f7ad... (41 %)
+Writing at 0x0008483c... (44 %)
+Writing at 0x00089d52... (47 %)
+Writing at 0x0008fe48... (50 %)
+Writing at 0x00094ded... (52 %)
+Writing at 0x00099d40... (55 %)
+Writing at 0x0009f4ea... (58 %)
+Writing at 0x000a45ea... (61 %)
+Writing at 0x000aa10e... (64 %)
+Writing at 0x000af578... (67 %)
+Writing at 0x000b4fc0... (70 %)
+Writing at 0x000bad10... (73 %)
+Writing at 0x000c1fad... (76 %)
+Writing at 0x000cb19d... (79 %)
+Writing at 0x000d08ee... (82 %)
+Writing at 0x000d65e7... (85 %)
+Writing at 0x000dd1c0... (88 %)
+Writing at 0x000e2d16... (91 %)
+Writing at 0x000e91db... (94 %)
+Writing at 0x000eea91... (97 %)
+Writing at 0x000f483e... (100 %)
+Wrote 953488 bytes (552254 compressed) at 0x00010000 in 7.6 seconds (effective 1003.5 kbit/s)...
+Hash of data verified.
+Compressed 3072 bytes to 105...
+Writing at 0x00008000... (100 %)
+Wrote 3072 bytes (105 compressed) at 0x00008000 in 0.1 seconds (effective 399.0 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...

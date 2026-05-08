@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "adhme",
-    "project_version":    "f0e41f7-dirty",
+    "project_version":    "3ab1d41-dirty",
     "project_path":       "/home/david/dev/adhme",
     "idf_path":           "/home/david/.espressif/v5.3.5/esp-idf",
     "build_dir":          "/home/david/dev/adhme/build",
@@ -1300,7 +1300,7 @@
             "managed_reqs": [ "esp_lcd_sh8601", "espressif__esp_lcd_touch_ft5x06", "lvgl__lvgl" ],
             "managed_priv_reqs": [ "espressif__es8311", "espressif__esp_io_expander_tca9554" ],
             "file": "/home/david/dev/adhme/build/esp-idf/main/libmain.a",
-            "sources": [ "/home/david/dev/adhme/main/main.c", "/home/david/dev/adhme/main/display.c", "/home/david/dev/adhme/main/ui_home.c", "/home/david/dev/adhme/main/rtc.c", "/home/david/dev/adhme/main/ui_timeset.c", "/home/david/dev/adhme/main/ui_quick_capture.c", "/home/david/dev/adhme/main/audio_capture.c", "/home/david/dev/adhme/main/sd_card.c", "/home/david/dev/adhme/main/button.c", "/home/david/dev/adhme/main/ui_lock_in.c", "/home/david/dev/adhme/main/tone_player.c" ],
+            "sources": [ "/home/david/dev/adhme/main/main.c", "/home/david/dev/adhme/main/display.c", "/home/david/dev/adhme/main/ui_home.c", "/home/david/dev/adhme/main/rtc.c", "/home/david/dev/adhme/main/ui_timeset.c", "/home/david/dev/adhme/main/ui_quick_capture.c", "/home/david/dev/adhme/main/audio_capture.c", "/home/david/dev/adhme/main/sd_card.c", "/home/david/dev/adhme/main/button.c", "/home/david/dev/adhme/main/ui_lock_in.c", "/home/david/dev/adhme/main/tone_player.c", "/home/david/dev/adhme/main/ui_check_in.c" ],
             "include_dirs": [ "." ]
         },
         "mbedtls": {

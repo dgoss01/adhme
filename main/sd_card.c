@@ -8,6 +8,8 @@
 #include <string.h>
 #include <time.h>
 #include <sys/time.h>
+#include <sys/stat.h>
+#include <errno.h>
 
 static const char *TAG = "sd_card";
 
@@ -72,20 +74,55 @@ bool sd_card_mounted(void)
     return s_mounted;
 }
 
+// ─────────────────────────────────────────
+// sd_card_ensure_dir — single-level mkdir if missing
+// ─────────────────────────────────────────
+esp_err_t sd_card_ensure_dir(const char *path)
+{
+    if (!s_mounted) {
+        return ESP_ERR_INVALID_STATE;
+    }
+    if (path == NULL || path[0] == '\0') {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    struct stat st;
+    if (stat(path, &st) == 0) {
+        if (S_ISDIR(st.st_mode)) {
+            return ESP_OK;          // already exists — common case, silent
+        }
+        ESP_LOGE(TAG, "Path exists but is not a directory: %s", path);
+        return ESP_FAIL;
+    }
+
+    // Doesn't exist — create it. FAT-fs ignores mode bits, but POSIX wants them.
+    if (mkdir(path, 0755) != 0) {
+        ESP_LOGE(TAG, "mkdir(%s) failed: %s", path, strerror(errno));
+        return ESP_FAIL;
+    }
+    ESP_LOGI(TAG, "Created directory: %s", path);
+    return ESP_OK;
+}
+
 void sd_card_make_filename(char *buf, size_t len)
 {
+    // Make sure the captures directory exists so the writer doesn't trip.
+    // If SD is not mounted, ensure_dir will return early and the caller's
+    // open() will fail naturally — same behavior as before, just cleaner.
+    sd_card_ensure_dir(SD_DIR_CAPTURES);
+
     struct timeval tv;
     gettimeofday(&tv, NULL);
     struct tm *t = localtime(&tv.tv_sec);
-    // Format: YYDDD_HHmmss.WAV
+    // Format: YYDDD-HHmmss.WAV
     //   YY  = 2-digit year (26 = 2026)
     //   DDD = day-of-year (001–366)
     //   HH  = hour, mm = minute, ss = second
     // Sorts chronologically, collision-proof, LFN-friendly
-    snprintf(buf, len, SD_MOUNT_POINT "/%02d%03d-%02d%02d%02d.WAV",
+    snprintf(buf, len, SD_DIR_CAPTURES "/%02d%03d-%02d%02d%02d.WAV",
         t->tm_year - 100,   // years since 2000
         t->tm_yday + 1,     // 1-based day of year
         t->tm_hour,
         t->tm_min,
         t->tm_sec);
-    }
+}

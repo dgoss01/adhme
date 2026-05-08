@@ -210,9 +210,12 @@ static void update_recent_list(void)
     static char names[MAX_WAV][20];
     int count = 0;
 
-    DIR *dir = opendir(SD_MOUNT_POINT);
+    DIR *dir = opendir(SD_DIR_CAPTURES);
     if (!dir) {
-        ESP_LOGW(TAG, "opendir failed");
+        // Directory may not exist yet (no captures recorded). That's fine —
+        // show empty rows rather than warning.
+        for (int i = 0; i < 3; i++)
+            lv_label_set_text(s_recent_rows[i], "--");
         return;
     }
 
