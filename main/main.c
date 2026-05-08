@@ -13,6 +13,7 @@
 #include "ui_quick_capture.h"
 #include "ui_lock_in.h"
 #include "ui_check_in.h"
+#include "ui_sand.h"
 #include "audio_capture.h"
 #include "tone_player.h"
 #include "sd_card.h"
@@ -32,11 +33,11 @@ static lv_obj_t *s_timeset_screen       = NULL;
 static lv_obj_t *s_quick_capture_screen = NULL;
 static lv_obj_t *s_lock_in_screen       = NULL;
 static lv_obj_t *s_check_in_screen      = NULL;
+static lv_obj_t *s_sand_screen          = NULL;
 
 // Stub screens — replaced when each app is implemented
 static lv_obj_t *s_drift_screen        = NULL;
 static lv_obj_t *s_breathe_screen      = NULL;
-static lv_obj_t *s_sand_screen         = NULL;
 static lv_obj_t *s_spark_screen        = NULL;
 
 static adhme_state_t s_return_state    = STATE_HOME;
@@ -126,6 +127,12 @@ static void state_task(void *pvParameters) {
                         ui_lock_in_pause();
                     }
 
+                    // Stop Sand physics before leaving the screen
+                    if (g_current_state == STATE_SAND &&
+                        msg.next_state != STATE_SAND) {
+                        ui_sand_stop();
+                    }
+
                     if (msg.next_state == STATE_QUICK_CAPTURE) {
                         s_return_state = g_current_state;
                     }
@@ -153,6 +160,7 @@ static void state_task(void *pvParameters) {
                             break;
                         case STATE_SAND:
                             lv_scr_load(s_sand_screen);
+                            ui_sand_start();
                             break;
                         case STATE_SPARK:
                             lv_scr_load(s_spark_screen);
@@ -216,12 +224,12 @@ void app_main(void)
         s_quick_capture_screen = ui_quick_capture_create();
         s_lock_in_screen       = ui_lock_in_create();
         s_check_in_screen      = ui_check_in_create();
+        s_sand_screen          = ui_sand_create();
 
         // Stub screens — replaced as each app is implemented
-        s_drift_screen    = build_stub_screen("DRIFT",    0x6a9ab8);
-        s_breathe_screen  = build_stub_screen("BREATHE",  0x7ab8a0);
-        s_sand_screen     = build_stub_screen("SAND",     0xc4a840);
-        s_spark_screen    = build_stub_screen("SPARK",    0x8b9a3d);
+        s_drift_screen    = build_stub_screen("DRIFT",   0x6a9ab8);
+        s_breathe_screen  = build_stub_screen("BREATHE", 0x7ab8a0);
+        s_spark_screen    = build_stub_screen("SPARK",   0x8b9a3d);
 
         lv_scr_load(s_home_screen);
         display_unlock();
