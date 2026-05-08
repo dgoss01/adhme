@@ -1,0 +1,211 @@
+[0;32mI (101) esp_image: segment 0: paddr=00010020 vaddr=3c0700ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0x2b (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40393746
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x19b4
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xe8c
+load:0x403cb700,len:0x3144
+entry 0x403c8940
+[0;32mI (26) boot: ESP-IDF v5.3.5 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time Apr 27 2026 21:46:37[0m
+[0;32mI (27) boot: Multicore bootloader[0m
+[0;32mI (30) boot: chip revision: v0.2[0m
+[0;32mI (34) boot: efuse block revision: v1.3[0m
+[0;32mI (38) qio_mode: Enabling QIO for flash chip WinBond[0m
+[0;32mI (44) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (49) boot.esp32s3: SPI Mode       : QIO[0m
+[0;32mI (53) boot.esp32s3: SPI Flash Size : 16MB[0m
+[0;32mI (58) boot: Enabling RNG early entropy source...[0m
+[0;32mI (64) boot: Partition Table:[0m
+[0;32mI (67) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (74) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (82) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (89) boot:  2 factory          factory app      00 00 00010000 00300000[0m
+[0;32mI (97) boot: End of partition table[0m
+[0;32mI (101) esp_image: segment 0: paddr=00010020 vaddr=3c070020 size=46300h (287488) map[0m
+[0;32mI (154) esp_image: segment 1: paddr=00056328 vaddr=3fcaff00 size=0384ch ( 14412) load[0m
+[0;32mI (157) esp_image: segment 2: paddr=00059b7c vaddr=40374000 size=0649ch ( 25756) load[0m
+[0;32mI (165) esp_image: segment 3: paddr=00060020 vaddr=42000020 size=6ed0ch (453900) map[0m
+[0;32mI (238) esp_image: segment 4: paddr=000ced34 vaddr=4037a49c size=259c0h (154048) load[0m
+[0;32mI (285) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (285) boot: Disabling RNG early entropy source...[0m
+[0;32mI (297) octal_psram: vendor id    : 0x0d (AP)[0m
+[0;32mI (298) octal_psram: dev id       : 0x02 (generation 3)[0m
+[0;32mI (298) octal_psram: density      : 0x03 (64 Mbit)[0m
+[0;32mI (303) octal_psram: good-die     : 0x01 (Pass)[0m
+[0;32mI (308) octal_psram: Latency      : 0x01 (Fixed)[0m
+[0;32mI (313) octal_psram: VCC          : 0x01 (3V)[0m
+[0;32mI (318) octal_psram: SRF          : 0x01 (Fast Refresh)[0m
+[0;32mI (324) octal_psram: BurstType    : 0x01 (Hybrid Wrap)[0m
+[0;32mI (330) octal_psram: BurstLen     : 0x01 (32 Byte)[0m
+[0;32mI (335) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)[0m
+[0;32mI (342) octal_psram: DriveStrength: 0x00 (1/1)[0m
+[0;32mI (347) MSPI Timing: PSRAM timing tuning index: 5[0m
+[0;32mI (352) esp_psram: Found 8MB PSRAM device[0m
+[0;32mI (357) esp_psram: Speed: 80MHz[0m
+[0;32mI (379) mmu_psram: Read only data copied and mapped to SPIRAM[0m
+[0;32mI (409) mmu_psram: Instructions copied and mapped to SPIRAM[0m
+[0;32mI (409) cpu_start: Multicore app[0m
+[0;32mI (668) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (676) cpu_start: Pro cpu start user code[0m
+[0;32mI (676) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (677) app_init: Application information:[0m
+[0;32mI (679) app_init: Project name:     adhme[0m
+[0;32mI (684) app_init: App version:      f0e41f7-dirty[0m
+[0;32mI (689) app_init: Compile time:     May  7 2026 13:51:18[0m
+[0;32mI (695) app_init: ELF file SHA256:  50d9fb7ff...[0m
+[0;32mI (701) app_init: ESP-IDF:          v5.3.5[0m
+[0;32mI (705) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (710) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (715) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (720) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (727) heap_init: At 3FCC4B18 len 00024BF8 (146 KiB): RAM[0m
+[0;32mI (733) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (739) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (746) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (752) esp_psram: Adding pool of 7424K of PSRAM memory to heap allocator[0m
+[0;32mI (759) esp_psram: Adding pool of 39K of PSRAM memory gap generated due to end address alignment of drom to the heap allocator[0m
+[0;32mI (772) spi_flash: detected chip: winbond[0m
+[0;32mI (776) spi_flash: flash io: qio[0m
+[0;33mW (780) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (791) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (797) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (805) main_task: Started on CPU0[0m
+[0;32mI (809) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (818) main_task: Calling app_main()[0m
+[0;32mI (822) ADHMe: ADHMe starting...[0m
+[0;32mI (826) display: Init I2C[0m
+[0;32mI (829) display: Init IO expander[0m
+[0;32mI (1034) display: Init SPI[0m
+[0;32mI (1034) display: Install panel IO[0m
+[0;32mI (1035) display: Install SH8601[0m
+[0;32mI (1035) sh8601: LCD panel create success, version: 1.0.0[0m
+[0;32mI (1271) display: Init touch[0m
+[0;32mI (1271) gpio: GPIO[21]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:2 [0m
+[0;32mI (1274) display: Init LVGL 9[0m
+[0;32mI (1278) display: LVGL task started[0m
+[0;32mI (1281) display: Display ready[0m
+[0;32mI (1285) gpio: GPIO[46]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (1316) ES8311: ES8311 in Slave mode and I2S format[0m
+[0;32mI (1321) audio_cap: Audio ready — 16000 Hz mono WAV to SD[0m
+[0;32mI (1322) tone: Tone player ready — 16000 Hz sample rate[0m
+[0;32mI (1322) tone: tone_task started[0m
+[0;32mI (1327) rtc: System time synced from RTC (DST offset: 3600s)[0m
+[0;32mI (1422) ui_qc: Quick Capture ready[0m
+[0;32mI (1468) ui_lock_in: Lock In ready[0m
+[0;32mI (1482) gpio: GPIO[2]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (1483) gpio: GPIO[1]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (1490) gpio: GPIO[3]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (1539) sd_card: Mounted on /sdcard — SD 14910.0 MB[0m
+[0;32mI (1574) button: button_poll_task started on core 1[0m
+[0;32mI (1574) button: Button init OK[0m
+[0;32mI (1574) button: button_event_task started on core 1[0m
+[0;32mI (1574) gpio: GPIO[0]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (1574) ADHMe: ADHMe running[0m
+[0;32mI (1587) button: Button poll using IO expander handle OK[0m
+[0;32mI (1591) main_task: Returned from app_main()[0m
+[0;32mI (5213) ui_home: Tile tapped → 1[0m
+[0;32mI (5213) ADHMe: State: HOME → LOCK_IN[0m
+[0;32mI (910121) ui_lock_in: Arc complete — round 1 done[0m
+[0;31mE (1302508) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1302508) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (1302572) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1302572) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (1302635) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1302635) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (1302698) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1302698) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (1302761) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1302761) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (1302824) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1302824) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (1302887) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1302887) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (1302950) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1302950) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (1303013) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1303013) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (1303076) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1303076) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (1303139) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1303139) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (1303202) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1303202) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (1303266) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1303266) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (1303330) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1303330) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (1303393) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1303393) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (1303456) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (1303456) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;32mI (1862483) ui_lock_in: Arc complete — round 2 done[0m
+[0;32mI (1910709) button: event 2 received[0m
+[0;32mI (1910709) button: BOOT → HOME[0m
+[0;32mI (1910710) ADHMe: State: LOCK_IN → HOME[0m
+[0;31mE (2090769) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2090769) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2090833) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2090833) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2090896) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2090896) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2090959) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2090959) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2091023) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2091023) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2091087) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2091087) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2091150) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2091150) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2091213) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2091213) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2091276) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2091276) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2091339) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2091339) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2091402) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2091402) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2091465) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2091465) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2091528) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2091528) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2091591) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2091591) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2091654) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2091654) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2674521) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2674521) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2674585) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2674585) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2674649) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2674649) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2674713) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2674713) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2674776) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2674776) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2674839) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2674839) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2674902) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2674902) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2674965) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2674965) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2675028) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2675028) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2675091) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2675091) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2675154) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2675154) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2675217) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2675217) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2675280) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2675280) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2675343) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2675343) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2675406) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2675406) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;31mE (2675469) tca9554: read_input_reg(94): Read input reg failed[0m
+[0;31mE (2675469) io_expander: esp_io_expander_get_level(121): Read input reg failed[0m
+[0;32mI (2810477) ui_lock_in: Arc complete — round 3 done[0m

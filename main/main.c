@@ -11,7 +11,9 @@
 #include "ui_home.h"
 #include "ui_timeset.h"
 #include "ui_quick_capture.h"
+#include "ui_lock_in.h"
 #include "audio_capture.h"
+#include "tone_player.h"
 #include "sd_card.h"
 #include "button.h"
 
@@ -27,9 +29,9 @@ volatile adhme_state_t g_current_state = STATE_HOME;
 static lv_obj_t *s_home_screen          = NULL;
 static lv_obj_t *s_timeset_screen       = NULL;
 static lv_obj_t *s_quick_capture_screen = NULL;
+static lv_obj_t *s_lock_in_screen       = NULL;
 
 // Stub screens — replaced when each app is implemented
-static lv_obj_t *s_lock_in_screen      = NULL;
 static lv_obj_t *s_check_in_screen     = NULL;
 static lv_obj_t *s_drift_screen        = NULL;
 static lv_obj_t *s_breathe_screen      = NULL;
@@ -39,8 +41,7 @@ static lv_obj_t *s_spark_screen        = NULL;
 static adhme_state_t s_return_state    = STATE_HOME;
 
 // ─────────────────────────────────────────
-// Stub screen builder — dark background + centered label
-// Used as placeholder until each app screen is implemented
+// Stub screen builder
 // ─────────────────────────────────────────
 static lv_obj_t* build_stub_screen(const char *name, uint32_t accent)
 {
@@ -116,19 +117,30 @@ static void state_task(void *pvParameters) {
                     adhme_state_name(g_current_state),
                     adhme_state_name(msg.next_state));
 
-                // Save return state before entering Quick Capture
-                if (msg.next_state == STATE_QUICK_CAPTURE) {
-                    s_return_state = g_current_state;
-                }
-
-                g_current_state = msg.next_state;
-
                 if (display_lock(100)) {
+
+                    // ── Pre-transition cleanup ──────────────────────────
+                    // If we're heading to Quick Capture and Lock In is active,
+                    // pause the timer so the session is resumable on return.
+                    if (msg.next_state == STATE_QUICK_CAPTURE &&
+                        g_current_state == STATE_LOCK_IN) {
+                        ui_lock_in_pause();
+                    }
+
+                    // Save return state before entering Quick Capture
+                    if (msg.next_state == STATE_QUICK_CAPTURE) {
+                        s_return_state = g_current_state;
+                    }
+
+                    g_current_state = msg.next_state;
+
+                    // ── Screen load ─────────────────────────────────────
                     switch (msg.next_state) {
                         case STATE_HOME:
                             lv_scr_load(s_home_screen);
                             break;
                         case STATE_LOCK_IN:
+                            ui_lock_in_reset();
                             lv_scr_load(s_lock_in_screen);
                             break;
                         case STATE_CHECK_IN:
@@ -189,10 +201,13 @@ void app_main(void)
 
     display_init();
 
-    // Audio codec + I2S (I2C must be up first — display_init handles that)
+    // Audio codec + I2S — must come before tone_player_init()
     if (audio_capture_init() != ESP_OK) {
-        ESP_LOGW(TAG, "Audio init failed — Quick Capture will be silent");
+        ESP_LOGW(TAG, "Audio init failed — Quick Capture and tones disabled");
     }
+
+    // Tone player — uses TX handle from audio_capture, init after
+    tone_player_init();
 
     // Sync system time from RTC
     nvs_flash_init();
@@ -203,9 +218,9 @@ void app_main(void)
         s_home_screen          = ui_home_create();
         s_timeset_screen       = ui_timeset_create();
         s_quick_capture_screen = ui_quick_capture_create();
+        s_lock_in_screen       = ui_lock_in_create();
 
         // Stub screens — replaced as each app is implemented
-        s_lock_in_screen  = build_stub_screen("LOCK IN",  0x3d8b46);
         s_check_in_screen = build_stub_screen("CHECK IN", 0xc4a840);
         s_drift_screen    = build_stub_screen("DRIFT",    0x6a9ab8);
         s_breathe_screen  = build_stub_screen("BREATHE",  0x7ab8a0);
